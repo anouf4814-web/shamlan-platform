@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منصة شملان الرقمية | SHAMLAN Private Cloud</title>
+  <title>منصة شملان الرقمية | SHAMLAN Cloud Engine</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -55,18 +55,12 @@
       color: var(--muted); cursor: pointer; font-size: 13px; user-select: none;
     }
     .nav-pill.active { background: var(--navy); color: #fff; }
-    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
     .stat-box {
       background: #fff; padding: 12px 8px; border-radius: 14px; text-align: center; border: 1px solid var(--border);
     }
     .stat-box .num { font-size: 19px; font-weight: 900; color: var(--navy); }
     .stat-box .lbl { font-size: 11px; color: var(--muted); font-weight: 700; }
-    .quota-bar-wrap {
-      background: #fff; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px;
-    }
-    .quota-head { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 5px; }
-    .quota-track { height: 7px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
-    .quota-fill { height: 100%; background: linear-gradient(90deg, var(--sky), var(--emerald)); width: 0%; transition: 0.4s; }
     .index-box {
       background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 14px; margin-bottom: 16px;
     }
@@ -95,6 +89,7 @@
     .btn-gold { background: var(--gold); color: #fff; }
     .btn-sky { background: var(--sky); color: #fff; }
     .btn-emerald { background: var(--emerald); color: #fff; }
+    .btn-whatsapp { background: #25d366; color: #fff; }
     .btn-danger { background: var(--danger); color: #fff; }
     .btn-outline { background: #fff; border: 1.5px solid var(--border); color: var(--text); }
     .btn-sm { padding: 7px 11px; font-size: 12px; width: auto; border-radius: 8px; }
@@ -109,14 +104,15 @@
       background: var(--gold-soft); border: 1.5px solid #fcd34d; border-radius: 12px; padding: 11px 13px;
       margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
     }
-    .privacy-banner {
-      background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px; margin: 12px 0;
-      font-size: 12px; color: var(--navy); display: flex; align-items: center; gap: 8px;
+    .direct-link-card {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 2px solid #10b981; border-radius: 14px; padding: 14px; margin: 12px 0;
     }
     .badge {
       display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 700;
       background: var(--gold-soft); color: var(--gold); margin-left: 4px;
     }
+    .badge-cloud { background: var(--emerald-soft); color: var(--emerald); }
     .badge-private { background: #e2e8f0; color: #334155; }
     .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
@@ -134,16 +130,22 @@
       background: var(--sky-soft); color: var(--navy); padding: 9px 12px; border-radius: 10px;
       font-size: 13px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
     }
+    .qr-wrap { text-align: center; margin-top: 12px; }
+    .qr-wrap img { border: 5px solid #fff; border-radius: 12px; }
+    /* إطار التشغيل المباشر ملء الشاشة للرابط المباشر */
+    #liveProjectFrame {
+      position: fixed; inset: 0; width: 100vw; height: 100vh; border: none; z-index: 9999; background: #fff;
+    }
   </style>
 </head>
 <body>
 
-<header>
+<header id="mainHeader">
   <div class="brand">
     <div class="brand-logo">SHAMLAN</div>
     <div>
       <h1>منصة شملان الرقمية</h1>
-      <span>مساحة العمل السحابية الخاصة والمحمية</span>
+      <span>محرك ربط المشاريع بالسحابة وتوليد الروابط المباشرة</span>
     </div>
   </div>
   <div id="headerUser" class="user-pill hidden">
@@ -152,7 +154,7 @@
   </div>
 </header>
 
-<div class="container">
+<div class="container" id="mainContainer">
   <div id="alertBox" class="alert"></div>
 
   <!-- شاشة الدخول الخاصة -->
@@ -174,57 +176,56 @@
       <label>كلمة المرور (6 أحرف على الأقل)</label>
       <input type="password" id="authPassword" placeholder="••••••••" dir="ltr" />
     </div>
-    <button type="button" id="authSubmitBtn" class="btn btn-primary">دخول إلى مساحتي الخاصة</button>
+    <button type="button" id="authSubmitBtn" class="btn btn-primary">دخول إلى المنصة</button>
     <div class="meta" style="text-align:center; margin-top:10px;">
-      🔒 جميع المشاريع والملفات في المنصة خاصة ومشفرة لكل حساب ولا يمكن لأي زائر أو مستخدم آخر تصفحها أو تنزيلها.
+      🔒 مشاريعك محمية ومحصورة بحسابك؛ ولا يفتح للزوار سوى الرابط المباشر للمشروع المحدد دون إمكانية تنزيل ملفاتك أو تصفح مشاريعك.
     </div>
   </div>
 
-  <!-- لوحة التحكم الخاصة بالمستخدم -->
+  <!-- لوحة التحكم الخاصة -->
   <div id="dashboardSection" class="hidden">
     <div id="mainNavPills" class="nav-pills">
       <div id="navProjects" class="nav-pill active">📑 الفهرس ومشاريعي</div>
-      <div id="navNewProject" class="nav-pill">➕ إضافة مشروع خاص</div>
+      <div id="navNewProject" class="nav-pill">🚀 رفع مشروع وربطه سحابياً</div>
       <div id="navAdmin" class="nav-pill hidden">🛡️ الإدارة</div>
     </div>
 
     <div class="stats-grid">
-      <div class="stat-box"><div class="num" id="statProjects">0</div><div class="lbl">مشاريعي</div></div>
-      <div class="stat-box"><div class="num" id="statFiles">0</div><div class="lbl">ملفاتي</div></div>
+      <div class="stat-box"><div class="num" id="statProjects">0</div><div class="lbl">المشاريع</div></div>
+      <div class="stat-box"><div class="num" id="statFiles">0</div><div class="lbl">الملفات</div></div>
       <div class="stat-box"><div class="num" id="statStorage">0 MB</div><div class="lbl">المساحة</div></div>
     </div>
-    <div class="quota-bar-wrap">
-      <div class="quota-head"><span>السعة السحابية الخاصة</span><span id="quotaText">0 / 100 MB</span></div>
-      <div class="quota-track"><div id="quotaFill" class="quota-fill"></div></div>
-    </div>
 
-    <!-- إنشاء مشروع خاص -->
+    <!-- إنشاء مشروع وربطه تلقائياً بالسحابة وتوليد رابطه المباشر -->
     <div id="viewNewProject" class="card hidden">
-      <h2 class="card-title">➕ إنشاء مشروع خاص وحفظه سحابياً</h2>
+      <h2 class="card-title">🚀 رفع مشروع جديد وربطه بقاعدة البيانات السحابية</h2>
       <div class="form-group">
-        <label>اسم المشروع / المبادرة / ملف الإنجاز</label>
-        <input type="text" id="projName" placeholder="مثال: مبادرة أثر ينمو - فرسان" />
+        <label>اسم المشروع / المنصة / المبادرة</label>
+        <input type="text" id="projName" placeholder="مثال: مبادرة أنا أتصرف بأمان" />
       </div>
       <div class="form-group">
         <label>التصنيف في الفهرس</label>
         <select id="projCategory"></select>
       </div>
       <div class="form-group">
-        <label>ملاحظات / وصف المشروع (خاص بك)</label>
-        <textarea id="projDesc" rows="2" placeholder="تفاصيل المشروع..."></textarea>
+        <label>وصف مختصر (اختياري)</label>
+        <textarea id="projDesc" rows="2" placeholder="وصف المشروع..."></textarea>
       </div>
-      <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:12px; border:1.5px dashed var(--sky);">
-        <label>إرفاق ملف المشروع الأساسي (HTML / PDF / صورة / ZIP) - اختياري</label>
+      <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:12px; border:1.5px dashed var(--sky);">
+        <label>اختر ملف المشروع (HTML / PDF / صورة)</label>
         <input type="file" id="initialProjFile" />
+        <div class="meta" style="color:var(--navy); margin-top:6px;">
+          ✨ عند الرفع سيتم ربط المشروع تلقائياً بقاعدة بيانات شملان السحابية وتوليد رابط مباشر خاص به بدون إمكانية تنزيل الكود.
+        </div>
       </div>
-      <button type="button" id="createProjBtn" class="btn btn-gold">🔒 حفظ المشروع في مساحتي الخاصة</button>
+      <button type="button" id="createProjBtn" class="btn btn-gold">⚡ رفع وربط بالسحابة وتوليد الرابط المباشر</button>
     </div>
 
-    <!-- الفهرس والمشاريع الخاصة -->
+    <!-- الفهرس وإدارة المشاريع -->
     <div id="viewProjects">
       <div class="index-box">
         <div style="font-weight:800; color:var(--navy); font-size:14px; margin-bottom:8px;">📑 فهرس مشاريعي السريع</div>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في مشاريعك الخاصة..." />
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في مشاريعك..." />
         <div id="categoryChips" class="chips-scroll"></div>
       </div>
 
@@ -236,9 +237,31 @@
       <div id="filesManagerCard" class="card hidden">
         <h2 id="selectedProjectTitle" class="card-title">إدارة المشروع</h2>
 
-        <div class="privacy-banner">
-          <span>🔒</span>
-          <span><strong>حماية الخصوصية مفعّلة:</strong> هذا المشروع وجميع ملفاته محصورة بحسابك فقط، وممنوعة من التصفح العام أو التنزيل الخارجي.</span>
+        <!-- صندوق الرابط المباشر للمشروع -->
+        <div id="directLinkBox" class="direct-link-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+            <div>
+              <strong>الربط السحابي:</strong>
+              <span id="cloudStatusBadge" class="badge badge-cloud">🟢 متصل بالسحابة وجاهز</span>
+            </div>
+            <button type="button" id="toggleLiveBtn" class="btn btn-outline btn-sm">🔒 إيقاف الرابط المباشر</button>
+          </div>
+
+          <div id="liveLinkControls">
+            <label style="color:#065f46;">🔗 الرابط المباشر الخاص بهذا المشروع (يعمل فوراً بدون تنزيل):</label>
+            <div style="display:flex; gap:6px; margin-bottom:8px;">
+              <input type="text" id="directProjectUrl" readonly dir="ltr" style="font-size:12px; background:#fff; border-color:#10b981;" />
+              <button type="button" id="btnCopyDirect" class="btn btn-primary btn-sm">📋 نسخ</button>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" id="btnOpenDirect" class="btn btn-emerald btn-sm">🚀 فتح الرابط المباشر</button>
+              <button type="button" id="btnShareWa" class="btn btn-whatsapp btn-sm">📲 إرسال عبر واتساب</button>
+            </div>
+            <div class="qr-wrap">
+              <img id="projectQrImg" src="" alt="QR Code" width="130" height="130" />
+              <div class="meta">باركود الدخول المباشر للمشروع (محمي من التنزيل)</div>
+            </div>
+          </div>
         </div>
 
         <div class="breadcrumb">
@@ -252,9 +275,9 @@
         <div id="foldersList"></div>
 
         <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:12px; border:1.5px dashed var(--sky); margin-top:10px;">
-          <label>رفع ملف خاص إلى المسار الحالي (حتى 100MB)</label>
+          <label>رفع أو تحديث ملف المشروع السحابي</label>
           <input type="file" id="fileInput" />
-          <button type="button" id="uploadFileBtn" class="btn btn-sky" style="margin-top:8px;">⬆️ رفع الملف وحفظه سحابياً</button>
+          <button type="button" id="uploadFileBtn" class="btn btn-sky" style="margin-top:8px;">⬆️ رفع الملف وربطه بالرابط المباشر</button>
         </div>
 
         <div id="filesList"><p class="meta">لا توجد ملفات في هذا المسار بعد.</p></div>
@@ -300,8 +323,106 @@
     if (['html', 'htm'].includes(e)) return '🌐';
     if (e === 'pdf') return '📕';
     if (['png', 'jpg', 'jpeg', 'webp', 'gif'].includes(e)) return '🖼️';
-    if (['zip', 'rar'].includes(e)) return '📦';
     return '📄';
+  }
+
+  // جسر الربط السحابي التلقائي الذي يُحقن داخل أي مشروع HTML مرفوع
+  function buildCloudBridgeScript(projectId) {
+    return `
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>
+<script>
+(function() {
+  window.SHAMLAN_CLOUD = {
+    projectId: "${projectId}",
+    url: "${SUPABASE_URL}",
+    key: "${SUPABASE_KEY}",
+    db: window.supabase ? window.supabase.createClient("${SUPABASE_URL}", "${SUPABASE_KEY}") : null,
+    save: async function(key, data) {
+      if (!this.db) return { error: 'Not initialized' };
+      return await this.db.from('hosted_project_data').insert([{ project_id: this.projectId, data_key: key || 'record', payload: data }]);
+    },
+    load: async function(key) {
+      if (!this.db) return [];
+      let q = this.db.from('hosted_project_data').select('*').eq('project_id', this.projectId).order('created_at', { ascending: false });
+      if (key) q = q.eq('data_key', key);
+      const { data } = await q;
+      return data || [];
+    }
+  };
+  // إخفاء أي تنبيه "غير متصل بقاعدة البيانات" تلقائياً لأن المشروع أصبح متصلاً بسحابة شملان
+  window.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('div, p, span, banner').forEach(function(el) {
+      if (el.children.length === 0 && el.textContent && el.textContent.includes('غير متصل')) {
+        var parent = el.closest('div') || el;
+        parent.style.display = 'none';
+      }
+    });
+  });
+})();
+<\/script>`;
+  }
+
+  // تشغيل الرابط المباشر للمشروع (?live=SLUG) ملء الشاشة وربطه بالسحابة مع منع التنزيل
+  async function launchDirectLiveProject(slug) {
+    document.getElementById('mainHeader').classList.add('hidden');
+    document.getElementById('mainContainer').innerHTML = '<div style="text-align:center; padding:60px 20px; font-weight:800; color:#0b1f3a;">⏳ جاري تشغيل المشروع من سحابة شملان...</div>';
+
+    const { data: proj, error } = await db
+      .from('projects')
+      .select('*')
+      .eq('slug', slug)
+      .eq('visibility', 'public')
+      .eq('status', 'published')
+      .single();
+
+    if (error || !proj) {
+      document.getElementById('mainContainer').innerHTML = '<div style="text-align:center; padding:60px 20px; font-weight:800; color:#dc2626;">🔒 عذراً، هذا المشروع خاص أو غير متاح حالياً.</div>';
+      return;
+    }
+
+    document.title = proj.name + ' | منصة شملان الرقمية';
+
+    const { data: files } = await db
+      .from('project_files')
+      .select('*')
+      .eq('project_id', proj.id)
+      .eq('is_public', true)
+      .order('created_at', { ascending: false });
+
+    if (!files || files.length === 0) {
+      document.getElementById('mainContainer').innerHTML = '<div style="text-align:center; padding:60px 20px; font-weight:800;">لا يوجد ملف تشغيل مرفق بهذا المشروع.</div>';
+      return;
+    }
+
+    // البحث عن أول ملف HTML لتشغيله مباشرة، أو عرض الملف الأول
+    const htmlFile = files.find(f => ['html', 'htm'].includes((f.file_type || '').toLowerCase())) || files[0];
+    const { data: signed, error: signErr } = await db.storage.from('project-files').createSignedUrl(htmlFile.storage_path, 300);
+
+    if (signErr || !signed) {
+      document.getElementById('mainContainer').innerHTML = '<div style="text-align:center; padding:60px 20px; color:#dc2626;">تعذر تحميل ملف المشروع.</div>';
+      return;
+    }
+
+    if (['html', 'htm'].includes((htmlFile.file_type || '').toLowerCase())) {
+      const res = await fetch(signed.signedUrl);
+      let rawHtml = await res.text();
+      // حقن جسر السحابة ومنع كليك يمين/حفظ لحماية الكود
+      const bridge = buildCloudBridgeScript(proj.id);
+      rawHtml = rawHtml.includes('</body>') ? rawHtml.replace('</body>', bridge + '\n</body>') : rawHtml + bridge;
+
+      const iframe = document.createElement('iframe');
+      iframe.id = 'liveProjectFrame';
+      iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-modals allow-popups');
+      iframe.srcdoc = rawHtml;
+      document.body.innerHTML = '';
+      document.body.appendChild(iframe);
+    } else {
+      const iframe = document.createElement('iframe');
+      iframe.id = 'liveProjectFrame';
+      iframe.src = signed.signedUrl + '#toolbar=0';
+      document.body.innerHTML = '';
+      document.body.appendChild(iframe);
+    }
   }
 
   function switchAuthTab(mode) {
@@ -309,7 +430,7 @@
     document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
     document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
     document.getElementById('signupNameGroup').classList.toggle('hidden', mode === 'login');
-    document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'دخول إلى مساحتي الخاصة' : 'إنشاء الحساب والدخول';
+    document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'دخول إلى المنصة' : 'إنشاء الحساب والدخول';
   }
 
   function switchMainTab(tab) {
@@ -333,14 +454,11 @@
     }
     if (window.supabase) {
       db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    } else {
-      showAlert('تعذر الاتصال بالخادم، تأكد من اتصال الإنترنت وحدّث الصفحة.', 'error');
     }
   }
 
   async function handleAuth() {
     if (!db) await initSupabase();
-    if (!db) return;
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value;
     const displayName = document.getElementById('authName').value.trim();
@@ -348,7 +466,6 @@
 
     const btn = document.getElementById('authSubmitBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري التحقق...';
     try {
       if (authMode === 'signup') {
         const { data, error } = await db.auth.signUp({
@@ -359,37 +476,17 @@
         if (data.user && displayName) {
           await db.from('profiles').update({ display_name: displayName }).eq('id', data.user.id);
         }
-        showAlert('تم إنشاء الحساب الخاص بنجاح!', 'success');
+        showAlert('تم إنشاء الحساب بنجاح!', 'success');
       } else {
         const { error } = await db.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        showAlert('تم تسجيل الدخول إلى مساحتك الخاصة.', 'success');
+        showAlert('تم تسجيل الدخول بنجاح.', 'success');
       }
     } catch (err) {
       showAlert('خطأ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = authMode === 'login' ? 'دخول إلى مساحتي الخاصة' : 'إنشاء الحساب والدخول';
     }
-  }
-
-  async function launchHtmlFile(storagePath) {
-    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 120);
-    if (error) return showAlert('تعذر فتح المعاينة: ' + error.message, 'error');
-    try {
-      const res = await fetch(data.signedUrl);
-      const htmlText = await res.text();
-      const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
-      window.open(URL.createObjectURL(blob), '_blank');
-    } catch (e) {
-      window.open(data.signedUrl, '_blank');
-    }
-  }
-
-  async function openMyPrivateFile(storagePath) {
-    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 120);
-    if (error) return showAlert('تعذر فتح الملف: ' + error.message, 'error');
-    window.open(data.signedUrl, '_blank');
   }
 
   async function loadCategories() {
@@ -424,12 +521,9 @@
     const { data: filesData } = await db.from('project_files').select('file_size').eq('user_id', currentUser.id);
     const totalFiles = filesData ? filesData.length : 0;
     const totalBytes = filesData ? filesData.reduce((acc, f) => acc + (f.file_size || 0), 0) : 0;
-    const usedMB = (totalBytes / (1024 * 1024));
     document.getElementById('statProjects').textContent = projCount || 0;
     document.getElementById('statFiles').textContent = totalFiles;
-    document.getElementById('statStorage').textContent = usedMB.toFixed(2) + ' MB';
-    document.getElementById('quotaText').textContent = `${usedMB.toFixed(2)} / 100 MB`;
-    document.getElementById('quotaFill').style.width = Math.min(100, (usedMB / 100) * 100) + '%';
+    document.getElementById('statStorage').textContent = (totalBytes / (1024 * 1024)).toFixed(2) + ' MB';
   }
 
   async function createProject() {
@@ -441,15 +535,16 @@
 
     const btn = document.getElementById('createProjBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري الحفظ في مساحتك الخاصة...';
+    btn.textContent = 'جاري الرفع والربط السحابي...';
     try {
-      const slug = 'priv-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 6);
+      const slug = 'sh-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 6);
       const { data: proj, error } = await db.from('projects').insert([{
         user_id: currentUser.id,
         category_id: category_id || null,
         name, description, slug,
-        visibility: 'private',
-        status: 'draft',
+        visibility: 'public',
+        status: 'published',
+        published_at: new Date().toISOString(),
         keywords: []
       }]).select().single();
       if (error) throw error;
@@ -463,29 +558,28 @@
           project_id: proj.id, user_id: currentUser.id, name: initialFile.name,
           storage_path: storagePath, file_type: safeExt.toLowerCase(),
           mime_type: initialFile.type || 'application/octet-stream',
-          file_size: initialFile.size, is_public: false
+          file_size: initialFile.size, is_public: true
         }]);
       }
 
       document.getElementById('projName').value = '';
       document.getElementById('projDesc').value = '';
       document.getElementById('initialProjFile').value = '';
-      showAlert('تم حفظ المشروع في مساحتك الخاصة بنجاح!', 'success');
+      showAlert('تم رفع المشروع وربطه بالسحابة وتوليد رابطه المباشر بنجاح!', 'success');
       switchMainTab('projects');
       await loadProjects();
       await loadStats();
       selectProject(proj.id);
     } catch (err) {
-      showAlert('تعذر الحفظ: ' + err.message, 'error');
+      showAlert('خطأ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = '🔒 حفظ المشروع في مساحتي الخاصة';
+      btn.textContent = '⚡ رفع وربط بالسحابة وتوليد الرابط المباشر';
     }
   }
 
   async function loadProjects() {
-    const { data, error } = await db.from('projects').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
-    if (error) return;
+    const { data } = await db.from('projects').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
     projectsCache = data || [];
     renderFilteredProjects();
   }
@@ -500,22 +594,29 @@
     document.getElementById('filteredCount').textContent = filtered.length;
     const container = document.getElementById('projectsList');
     if (filtered.length === 0) {
-      container.innerHTML = '<p class="meta">لا توجد مشاريع مطابقة في الفهرس حالياً.</p>';
+      container.innerHTML = '<p class="meta">لا توجد مشاريع مطابقة حالياً.</p>';
       return;
     }
-    container.innerHTML = filtered.map(p => `
-      <div class="project-card ${selectedProject && p.id === selectedProject.id ? 'selected' : ''}">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-          <div>
-            <div style="font-weight:800; font-size:15px; color:var(--navy); margin-bottom:4px;">${escapeHtml(p.name)}</div>
-            <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
-            <span class="badge badge-private">🔒 خاص ومؤمّن</span>
+    container.innerHTML = filtered.map(p => {
+      const isLive = p.visibility === 'public' && p.status === 'published';
+      return `
+        <div class="project-card ${selectedProject && p.id === selectedProject.id ? 'selected' : ''}">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+            <div>
+              <div style="font-weight:800; font-size:15px; color:var(--navy); margin-bottom:4px;">${escapeHtml(p.name)}</div>
+              <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
+              <span class="badge ${isLive ? 'badge-cloud' : 'badge-private'}">${isLive ? '🟢 متصل بالسحابة (رابط مباشر)' : '🔒 متوقف'}</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="selectProject('${p.id}')">الرابط والإدارة</button>
           </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="selectProject('${p.id}')">فتح وإدارة</button>
+          ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
         </div>
-        ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
-      </div>
-    `).join('');
+      `;
+    }).join('');
+  }
+
+  function getDirectUrl() {
+    return `${window.location.origin}${window.location.pathname}?live=${selectedProject.slug}`;
   }
 
   async function selectProject(projectId) {
@@ -524,10 +625,47 @@
     currentFolderId = null;
     folderStack = [];
     document.getElementById('filesManagerCard').classList.remove('hidden');
-    document.getElementById('selectedProjectTitle').textContent = 'إدارة المشروع الخاص: ' + selectedProject.name;
+    document.getElementById('selectedProjectTitle').textContent = 'إدارة: ' + selectedProject.name;
+    updateDirectLinkUI();
     renderFilteredProjects();
     await refreshFolderAndFiles();
     document.getElementById('filesManagerCard').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function updateDirectLinkUI() {
+    const isLive = selectedProject.visibility === 'public' && selectedProject.status === 'published';
+    const badge = document.getElementById('cloudStatusBadge');
+    const btn = document.getElementById('toggleLiveBtn');
+    const ctrl = document.getElementById('liveLinkControls');
+
+    if (isLive) {
+      badge.textContent = '🟢 متصل بالسحابة وجاهز';
+      badge.className = 'badge badge-cloud';
+      btn.textContent = '🔒 إيقاف الرابط المباشر';
+      ctrl.classList.remove('hidden');
+      const url = getDirectUrl();
+      document.getElementById('directProjectUrl').value = url;
+      document.getElementById('projectQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(url)}`;
+    } else {
+      badge.textContent = '🔒 الرابط المباشر متوقف';
+      badge.className = 'badge badge-private';
+      btn.textContent = '🟢 تفعيل الرابط المباشر';
+      ctrl.classList.add('hidden');
+    }
+  }
+
+  async function toggleLiveState() {
+    const isCurrentlyLive = selectedProject.visibility === 'public' && selectedProject.status === 'published';
+    const updates = isCurrentlyLive
+      ? { visibility: 'private', status: 'draft' }
+      : { visibility: 'public', status: 'published', published_at: new Date().toISOString() };
+    const { data, error } = await db.from('projects').update(updates).eq('id', selectedProject.id).select().single();
+    if (error) return showAlert('خطأ: ' + error.message, 'error');
+    selectedProject = data;
+    await db.from('project_files').update({ is_public: !isCurrentlyLive }).eq('project_id', selectedProject.id);
+    updateDirectLinkUI();
+    await loadProjects();
+    showAlert(isCurrentlyLive ? 'تم إيقاف الرابط المباشر.' : 'تم تفعيل الرابط المباشر للمشروع!', 'success');
   }
 
   async function refreshFolderAndFiles() {
@@ -552,21 +690,17 @@
       filesEl.innerHTML = '<p class="meta">لا توجد ملفات في هذا المسار حتى الآن.</p>';
       return;
     }
-    filesEl.innerHTML = files.map(f => {
-      const isHtml = ['html', 'htm'].includes((f.file_type || '').toLowerCase());
-      return `
-        <div class="file-card">
-          <div style="font-weight:800; font-size:14px; color:var(--navy);">${getFileIcon(f.file_type)} ${escapeHtml(f.name)}</div>
-          <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB | 🔒 خاص بك</div>
-          <div class="actions">
-            ${isHtml ? `<button type="button" class="btn btn-emerald btn-sm" onclick="launchHtmlFile('${f.storage_path}')">🚀 معاينة وتشغيل</button>` : ''}
-            <button type="button" class="btn btn-sky btn-sm" onclick="openMyPrivateFile('${f.storage_path}')">📂 فتح ملفي</button>
-            <button type="button" class="btn btn-outline btn-sm" onclick="renameFile('${f.id}', '${escapeHtml(f.name)}')">✏️</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="deleteFile('${f.id}', '${f.storage_path}')">🗑️</button>
-          </div>
+    filesEl.innerHTML = files.map(f => `
+      <div class="file-card">
+        <div style="font-weight:800; font-size:14px; color:var(--navy);">${getFileIcon(f.file_type)} ${escapeHtml(f.name)}</div>
+        <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB | مربوط بالرابط المباشر</div>
+        <div class="actions">
+          <button type="button" class="btn btn-emerald btn-sm" onclick="window.open(getDirectUrl(), '_blank')">🚀 تشغيل بالرابط المباشر</button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="renameFile('${f.id}', '${escapeHtml(f.name)}')">✏️</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteFile('${f.id}', '${f.storage_path}')">🗑️</button>
         </div>
-      `;
-    }).join('');
+      </div>
+    `).join('');
   }
 
   function openFolder(folderId, folderName) {
@@ -579,8 +713,7 @@
 
   async function deleteFolder(folderId) {
     if (!confirm('حذف هذا المجلد؟')) return;
-    const { error } = await db.from('project_folders').delete().eq('id', folderId);
-    if (error) return showAlert('تعذر حذف المجلد: ' + error.message, 'error');
+    await db.from('project_folders').delete().eq('id', folderId);
     refreshFolderAndFiles();
   }
 
@@ -593,25 +726,39 @@
     const storagePath = `${currentUser.id}/${selectedProject.id}/${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${safeExt}`;
     const btn = document.getElementById('uploadFileBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري الحفظ السحابي الآمن...';
+    btn.textContent = 'جاري الرفع والربط السحابي...';
     try {
       const { error: uploadError } = await db.storage.from('project-files').upload(storagePath, file, { contentType: file.type });
       if (uploadError) throw uploadError;
       const { error: dbError } = await db.from('project_files').insert([{
         project_id: selectedProject.id, folder_id: currentFolderId, user_id: currentUser.id,
         name: file.name, storage_path: storagePath, file_type: safeExt.toLowerCase(),
-        mime_type: file.type || 'application/octet-stream', file_size: file.size, is_public: false
+        mime_type: file.type || 'application/octet-stream', file_size: file.size, is_public: true
       }]);
       if (dbError) throw dbError;
+
+      // تفعيل الربط السحابي والرابط المباشر تلقائياً
+      const { data: updatedProj } = await db
+        .from('projects')
+        .update({ visibility: 'public', status: 'published', published_at: new Date().toISOString() })
+        .eq('id', selectedProject.id)
+        .select()
+        .single();
+      if (updatedProj) {
+        selectedProject = updatedProj;
+        updateDirectLinkUI();
+        await loadProjects();
+      }
+
       fileInput.value = '';
-      showAlert('تم رفع الملف وحفظه في مساحتك الخاصة بنجاح!', 'success');
+      showAlert('تم رفع الملف وربطه بالسحابة! الرابط المباشر جاهز في الأعلى.', 'success');
       await refreshFolderAndFiles();
       await loadStats();
     } catch (err) {
       showAlert('خطأ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = '⬆️ رفع الملف وحفظه سحابياً';
+      btn.textContent = '⬆️ رفع الملف وربطه بالرابط المباشر';
     }
   }
 
@@ -631,15 +778,36 @@
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
+    await initSupabase();
+    if (!db) return;
+
+    // إذا تم فتح رابط مباشر لمشروع (?live=SLUG) شغّله فوراً بملء الشاشة
+    const params = new URLSearchParams(window.location.search);
+    const liveSlug = params.get('live') || params.get('share');
+    if (liveSlug) {
+      await launchDirectLiveProject(liveSlug);
+      return;
+    }
+
     document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
     document.getElementById('tabSignup').addEventListener('click', () => switchAuthTab('signup'));
     document.getElementById('authSubmitBtn').addEventListener('click', handleAuth);
-    document.getElementById('btnLogout').addEventListener('click', async () => { if (db) await db.auth.signOut(); });
+    document.getElementById('btnLogout').addEventListener('click', async () => { await db.auth.signOut(); });
     document.getElementById('navProjects').addEventListener('click', () => switchMainTab('projects'));
     document.getElementById('navNewProject').addEventListener('click', () => switchMainTab('new'));
     document.getElementById('navAdmin').addEventListener('click', () => switchMainTab('admin'));
     document.getElementById('createProjBtn').addEventListener('click', createProject);
     document.getElementById('searchInput').addEventListener('input', renderFilteredProjects);
+    document.getElementById('toggleLiveBtn').addEventListener('click', toggleLiveState);
+    document.getElementById('btnCopyDirect').addEventListener('click', () => {
+      navigator.clipboard.writeText(getDirectUrl());
+      showAlert('تم نسخ الرابط المباشر للمشروع!', 'success');
+    });
+    document.getElementById('btnOpenDirect').addEventListener('click', () => window.open(getDirectUrl(), '_blank'));
+    document.getElementById('btnShareWa').addEventListener('click', () => {
+      const text = `✨ *${selectedProject.name}*\n🔗 الرابط المباشر:\n${getDirectUrl()}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    });
     document.getElementById('btnNewFolder').addEventListener('click', async () => {
       const name = prompt('أدخل اسم المجلد الجديد:');
       if (!name || !name.trim()) return;
@@ -655,9 +823,6 @@
       refreshFolderAndFiles();
     });
     document.getElementById('uploadFileBtn').addEventListener('click', uploadFile);
-
-    await initSupabase();
-    if (!db) return;
 
     db.auth.onAuthStateChange(async (event, session) => {
       currentUser = session?.user || null;

@@ -25,76 +25,91 @@
     body { margin: 0; background: var(--bg); color: var(--text); }
     header {
       background: linear-gradient(135deg, var(--navy), var(--navy-light));
-      color: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+      color: #fff; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
       border-bottom: 3px solid var(--gold); position: sticky; top: 0; z-index: 100;
     }
     .brand { display: flex; align-items: center; gap: 10px; }
     .brand-badge {
       background: var(--gold); color: #fff; font-weight: 800; padding: 6px 10px;
-      border-radius: 8px; font-size: 14px; letter-spacing: 0.5px;
+      border-radius: 8px; font-size: 13px; letter-spacing: 0.5px;
     }
-    .brand h1 { margin: 0; font-size: 18px; font-weight: 800; }
+    .brand h1 { margin: 0; font-size: 17px; font-weight: 800; }
     .brand span { font-size: 11px; color: #cbd5e1; display: block; }
-    .container { max-width: 960px; margin: 18px auto; padding: 0 14px 40px; }
+    .container { max-width: 960px; margin: 16px auto; padding: 0 12px 50px; }
     .card {
-      background: var(--card); border-radius: 14px; padding: 18px;
-      box-shadow: 0 2px 10px rgba(15, 37, 71, 0.06); border: 1px solid var(--border); margin-bottom: 16px;
+      background: var(--card); border-radius: 14px; padding: 16px;
+      box-shadow: 0 2px 10px rgba(15, 37, 71, 0.06); border: 1px solid var(--border); margin-bottom: 14px;
     }
-    .card h2 { margin: 0 0 14px; font-size: 17px; color: var(--navy); border-right: 4px solid var(--gold); padding-right: 10px; }
+    .card h2 { margin: 0 0 14px; font-size: 16px; color: var(--navy); border-right: 4px solid var(--gold); padding-right: 10px; }
     .form-group { margin-bottom: 12px; }
     label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--navy); }
     input, select, textarea {
-      width: 100%; padding: 11px 12px; border: 1.5px solid var(--border); border-radius: 10px;
-      font-size: 14px; background: #fff; transition: 0.2s;
+      width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 14px; background: #fff;
     }
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--sky); }
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 11px 16px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 10px 14px; border: none; border-radius: 10px; font-size: 13px; font-weight: 700;
       cursor: pointer; transition: 0.2s; width: 100%;
     }
     .btn-primary { background: var(--navy); color: #fff; }
-    .btn-primary:hover { background: var(--navy-light); }
     .btn-gold { background: var(--gold); color: #fff; }
     .btn-sky { background: var(--sky); color: #fff; }
+    .btn-success { background: var(--success); color: #fff; }
     .btn-danger { background: var(--danger); color: #fff; }
-    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
-    .btn-sm { padding: 7px 11px; font-size: 12px; width: auto; border-radius: 8px; }
-    .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .btn-outline { background: #fff; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-sm { padding: 7px 10px; font-size: 12px; width: auto; border-radius: 8px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
     .tab {
       flex: 1; padding: 10px; text-align: center; border-radius: 10px; font-weight: 700;
-      background: #e2e8f0; color: var(--muted); cursor: pointer; font-size: 14px;
+      background: #e2e8f0; color: var(--muted); cursor: pointer; font-size: 13px;
     }
     .tab.active { background: var(--navy); color: #fff; }
     .alert {
-      padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; margin-bottom: 14px; display: none;
+      padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 700; margin-bottom: 14px; display: none;
     }
     .alert.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
     .alert.success { background: #dcfce7; color: #166534; border: 1px solid #86efac; display: block; }
-    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
     .stat-box {
-      background: var(--card); padding: 12px; border-radius: 12px; text-align: center;
+      background: var(--card); padding: 12px 8px; border-radius: 12px; text-align: center;
       border: 1px solid var(--border);
     }
-    .stat-box .num { font-size: 20px; font-weight: 800; color: var(--navy); }
+    .stat-box .num { font-size: 18px; font-weight: 800; color: var(--navy); }
     .stat-box .lbl { font-size: 11px; color: var(--muted); font-weight: 700; }
-    .project-item, .file-item {
-      border: 1.5px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 10px;
-      background: #fafafa; transition: 0.2s;
+    .project-item, .file-item, .folder-item {
+      border: 1.5px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px;
+      background: #fafafa;
     }
     .project-item.selected { border-color: var(--sky); background: #f0f9ff; }
+    .folder-item { background: #fffbeb; border-color: #fde68a; display: flex; justify-content: space-between; align-items: center; }
     .item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .item-title { font-weight: 800; font-size: 15px; color: var(--navy); margin: 0 0 4px; }
     .badge {
       display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
-      background: var(--gold-light); color: var(--gold);
+      background: var(--gold-light); color: var(--gold); margin-left: 4px;
     }
+    .badge-public { background: #dcfce7; color: #166534; }
+    .badge-private { background: #e2e8f0; color: #475569; }
     .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .hidden { display: none !important; }
     .user-pill {
-      display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12);
-      padding: 5px 10px; border-radius: 20px; font-size: 12px;
+      display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12);
+      padding: 5px 10px; border-radius: 20px; font-size: 11px;
+    }
+    .breadcrumb {
+      background: #e0f2fe; color: var(--navy); padding: 8px 12px; border-radius: 8px;
+      font-size: 13px; font-weight: 700; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .share-box {
+      background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 12px; margin-top: 12px;
+    }
+    .qr-wrap { text-align: center; margin-top: 10px; }
+    .qr-wrap img { border: 4px solid #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .version-list {
+      margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 12px;
     }
   </style>
 </head>
@@ -116,6 +131,19 @@
 
 <div class="container">
   <div id="alertBox" class="alert"></div>
+
+  <!-- واجهة العرض العامة للزوار (تعمل تلقائياً عند فتح رابط مشاركة ?share=...) -->
+  <div id="publicViewerSection" class="hidden">
+    <div class="card">
+      <div class="badge badge-public" style="margin-bottom:8px;">عرض عام موثّق عبر منصة شملان</div>
+      <h2 id="pubProjTitle">جاري تحميل المشروع...</h2>
+      <p id="pubProjDesc" class="meta"></p>
+      <div id="pubFilesList" style="margin-top:14px;"></div>
+      <div style="margin-top:16px;">
+        <button class="btn btn-outline btn-sm" onclick="exitPublicView()">الانتقال إلى تسجيل الدخول / لوحة التحكم</button>
+      </div>
+    </div>
+  </div>
 
   <!-- قسم تسجيل الدخول وإنشاء الحساب -->
   <div id="authSection" class="card">
@@ -141,6 +169,13 @@
 
   <!-- لوحة التحكم الرئيسية -->
   <div id="dashboardSection" class="hidden">
+    <!-- تبويبات التنقل الرئيسية -->
+    <div class="tabs">
+      <div id="navProjects" class="tab active" onclick="switchMainTab('projects')">📁 مشاريعي وملفاتي</div>
+      <div id="navNewProject" class="tab" onclick="switchMainTab('new')">➕ مشروع جديد</div>
+      <div id="navAdmin" class="tab hidden" onclick="switchMainTab('admin')">🛡️ الإدارة</div>
+    </div>
+
     <!-- إحصائيات سريعة -->
     <div class="stats-grid">
       <div class="stat-box">
@@ -149,23 +184,23 @@
       </div>
       <div class="stat-box">
         <div class="num" id="statFiles">0</div>
-        <div class="lbl">الملفات المرفوعة</div>
+        <div class="lbl">الملفات</div>
       </div>
       <div class="stat-box">
         <div class="num" id="statStorage">0 MB</div>
-        <div class="lbl">المساحة المستخدمة</div>
+        <div class="lbl">المساحة</div>
       </div>
     </div>
 
-    <!-- إنشاء مشروع جديد -->
-    <div class="card">
+    <!-- تبويب إنشاء مشروع جديد -->
+    <div id="viewNewProject" class="card hidden">
       <h2>إنشاء مشروع جديد</h2>
       <div class="form-group">
         <label>اسم المشروع / المبادرة / ملف الإنجاز</label>
         <input type="text" id="projName" placeholder="مثال: ملف الأداء الوظيفي 1448هـ" />
       </div>
       <div class="form-group">
-        <label>التصنيف</label>
+        <label>التصنيف / بند الإنجاز</label>
         <select id="projCategory"></select>
       </div>
       <div class="form-group">
@@ -175,23 +210,72 @@
       <button class="btn btn-gold" onclick="createProject()">+ حفظ وإنشاء المشروع</button>
     </div>
 
-    <!-- قائمة المشاريع -->
-    <div class="card">
-      <h2>مشاريعي المسجلة (اضغط على المشروع لإدارة ملفاته)</h2>
-      <div id="projectsList"><p class="meta">جاري التحميل...</p></div>
-    </div>
-
-    <!-- قسم إدارة ملفات المشروع المختار -->
-    <div id="filesManagerCard" class="card hidden">
-      <h2 id="selectedProjectTitle">ملفات المشروع</h2>
-
-      <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:10px; border:1px dashed var(--sky);">
-        <label>رفع ملف جديد إلى هذا المشروع (حد أقصى 100MB)</label>
-        <input type="file" id="fileInput" />
-        <button class="btn btn-sky" style="margin-top:8px;" onclick="uploadFile()">⬆️ رفع الملف وحفظه سحابياً</button>
+    <!-- تبويب المشاريع وإدارتها -->
+    <div id="viewProjects">
+      <div class="card">
+        <h2>مشاريعي المسجلة</h2>
+        <div id="projectsList"><p class="meta">جاري التحميل...</p></div>
       </div>
 
-      <div id="filesList"><p class="meta">لا توجد ملفات مرفوعة في هذا المشروع بعد.</p></div>
+      <!-- قسم إدارة محتويات المشروع المختار (المجلدات + الملفات + الإصدارات + المشاركة) -->
+      <div id="filesManagerCard" class="card hidden">
+        <h2 id="selectedProjectTitle">إدارة المشروع</h2>
+
+        <!-- شريط المشاركة العامة و QR -->
+        <div class="share-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <strong>حالة المشاركة:</strong>
+              <span id="projectVisibilityBadge" class="badge badge-private">خاص (لك فقط)</span>
+            </div>
+            <button id="toggleShareBtn" class="btn btn-success btn-sm" onclick="toggleProjectPublic()">🌐 نشر ومشاركة للجميع</button>
+          </div>
+          <div id="publicLinkArea" class="hidden" style="margin-top:10px;">
+            <label>رابط المشاركة المباشر للجميع (انسخه وأرسله عبر واتساب):</label>
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="publicShareUrl" readonly dir="ltr" style="font-size:12px;" />
+              <button class="btn btn-primary btn-sm" onclick="copyShareUrl()">نسخ</button>
+            </div>
+            <div class="qr-wrap">
+              <img id="projectQrImg" src="" alt="QR Code" width="130" height="130" />
+              <div class="meta">باركود الوصول السريع للمشروع</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- شريط التنقل بين المجلدات -->
+        <div class="breadcrumb" style="margin-top:14px;">
+          <span id="folderPathLabel">📂 المجلد الرئيسي للمشروع</span>
+          <div>
+            <button id="backFolderBtn" class="btn btn-outline btn-sm hidden" onclick="goParentFolder()">⬆️ للخلف</button>
+            <button class="btn btn-gold btn-sm" onclick="createFolder()">+ مجلد جديد</button>
+          </div>
+        </div>
+
+        <!-- قائمة المجلدات الفرعية -->
+        <div id="foldersList"></div>
+
+        <!-- صندوق رفع ملف جديد -->
+        <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:10px; border:1px dashed var(--sky); margin-top:10px;">
+          <label>رفع ملف / شاهد جديد إلى المسار الحالي (حد أقصى 100MB)</label>
+          <input type="file" id="fileInput" />
+          <div style="margin-top:8px; display:flex; align-items:center; gap:6px;">
+            <input type="checkbox" id="fileIsPublic" checked style="width:auto;" />
+            <label for="fileIsPublic" style="margin:0; font-weight:500;">إتاحة هذا الملف للزوار عند نشر المشروع كعام</label>
+          </div>
+          <button class="btn btn-sky" style="margin-top:8px;" onclick="uploadFile()">⬆️ رفع الملف وحفظه سحابياً</button>
+        </div>
+
+        <!-- قائمة الملفات -->
+        <div id="filesList"><p class="meta">لا توجد ملفات في هذا المسار بعد.</p></div>
+      </div>
+    </div>
+
+    <!-- تبويب لوحة الإدارة (يظهر للمشرفين admin) -->
+    <div id="viewAdmin" class="card hidden">
+      <h2>لوحة الإدارة والإشراف العام</h2>
+      <p class="meta">ملخص الحسابات والمشاريع المسجلة في النظام وفق صلاحياتك.</p>
+      <div id="adminSummaryBox"></div>
     </div>
   </div>
 </div>
@@ -203,14 +287,83 @@
 
   let authMode = 'login';
   let currentUser = null;
+  let userProfile = null;
   let categoriesMap = {};
-  let selectedProjectId = null;
+  let projectsCache = [];
+  let selectedProject = null;
+  let currentFolderId = null;
+  let folderStack = [];
+
+  // التحقق عند فتح الصفحة: هل الرابط رابط مشاركة عام (?share=SLUG)؟
+  window.addEventListener('DOMContentLoaded', async () => {
+    const params = new URLSearchParams(window.location.search);
+    const shareSlug = params.get('share');
+    if (shareSlug) {
+      await openPublicProject(shareSlug);
+    }
+  });
+
+  async function openPublicProject(slug) {
+    document.getElementById('authSection').classList.add('hidden');
+    document.getElementById('dashboardSection').classList.add('hidden');
+    document.getElementById('publicViewerSection').classList.remove('hidden');
+
+    const { data: proj, error } = await db
+      .from('projects')
+      .select('*')
+      .eq('slug', slug)
+      .eq('visibility', 'public')
+      .eq('status', 'published')
+      .single();
+
+    if (error || !proj) {
+      document.getElementById('pubProjTitle').textContent = 'المشروع غير متاح أو خاص';
+      document.getElementById('pubProjDesc').textContent = 'تأكد من صحة رابط المشاركة أو أن صاحب المشروع قام بنشره للعامة.';
+      return;
+    }
+
+    document.getElementById('pubProjTitle').textContent = proj.name;
+    document.getElementById('pubProjDesc').textContent = proj.description || 'مشروع منشور عبر منصة شملان الرقمية';
+
+    const { data: files } = await db
+      .from('project_files')
+      .select('*')
+      .eq('project_id', proj.id)
+      .eq('is_public', true)
+      .order('created_at', { ascending: false });
+
+    const listEl = document.getElementById('pubFilesList');
+    if (!files || files.length === 0) {
+      listEl.innerHTML = '<p class="meta">لا توجد ملفات عامة مرفقة حالياً.</p>';
+      return;
+    }
+
+    listEl.innerHTML = files.map(f => `
+      <div class="file-item">
+        <div class="item-title">📄 ${escapeHtml(f.name)}</div>
+        <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB</div>
+        <div class="actions">
+          <button class="btn btn-sky btn-sm" onclick="downloadFile('${f.storage_path}')">⬇️ عرض / تنزيل الملف</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function exitPublicView() {
+    window.history.replaceState({}, document.title, window.location.pathname);
+    document.getElementById('publicViewerSection').classList.add('hidden');
+    if (currentUser) {
+      document.getElementById('dashboardSection').classList.remove('hidden');
+    } else {
+      document.getElementById('authSection').classList.remove('hidden');
+    }
+  }
 
   function showAlert(msg, type = 'success') {
     const box = document.getElementById('alertBox');
     box.textContent = msg;
     box.className = 'alert ' + type;
-    setTimeout(() => { box.className = 'alert'; }, 6000);
+    setTimeout(() => { box.className = 'alert'; }, 5500);
   }
 
   function switchAuthTab(mode) {
@@ -219,6 +372,16 @@
     document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
     document.getElementById('signupNameGroup').classList.toggle('hidden', mode === 'login');
     document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'دخول إلى المنصة' : 'إنشاء الحساب والدخول';
+  }
+
+  function switchMainTab(tab) {
+    document.getElementById('navProjects').classList.toggle('active', tab === 'projects');
+    document.getElementById('navNewProject').classList.toggle('active', tab === 'new');
+    document.getElementById('navAdmin').classList.toggle('active', tab === 'admin');
+
+    document.getElementById('viewProjects').classList.toggle('hidden', tab !== 'projects');
+    document.getElementById('viewNewProject').classList.toggle('hidden', tab !== 'new');
+    document.getElementById('viewAdmin').classList.toggle('hidden', tab !== 'admin');
   }
 
   async function handleAuth() {
@@ -230,7 +393,6 @@
 
     const btn = document.getElementById('authSubmitBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري المعالجة...';
 
     try {
       if (authMode === 'signup') {
@@ -247,29 +409,38 @@
       } else {
         const { error } = await db.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        showAlert('تم تسجيل الدخول بنجاح.', 'success');
+        showAlert('مرحباً بعودتك إلى منصة شملان.', 'success');
       }
     } catch (err) {
       showAlert('خطأ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = authMode === 'login' ? 'دخول إلى المنصة' : 'إنشاء الحساب والدخول';
     }
   }
 
   async function logout() {
     await db.auth.signOut();
-    selectedProjectId = null;
+    selectedProject = null;
     document.getElementById('filesManagerCard').classList.add('hidden');
   }
 
   db.auth.onAuthStateChange(async (event, session) => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('share')) return;
+
     currentUser = session?.user || null;
     if (currentUser) {
       document.getElementById('authSection').classList.add('hidden');
       document.getElementById('dashboardSection').classList.remove('hidden');
       document.getElementById('headerUser').classList.remove('hidden');
       document.getElementById('userEmailLabel').textContent = currentUser.email;
+
+      const { data: prof } = await db.from('profiles').select('*').eq('id', currentUser.id).single();
+      userProfile = prof;
+      if (prof && prof.role === 'admin') {
+        document.getElementById('navAdmin').classList.remove('hidden');
+      }
+
       await loadCategories();
       await loadProjects();
       await loadStats();
@@ -281,8 +452,8 @@
   });
 
   async function loadCategories() {
-    const { data, error } = await db.from('project_categories').select('id, name');
-    if (error) return console.error(error);
+    const { data } = await db.from('project_categories').select('id, name');
+    if (!data) return;
     const sel = document.getElementById('projCategory');
     sel.innerHTML = '';
     categoriesMap = {};
@@ -313,7 +484,7 @@
 
     if (!name) return showAlert('يرجى إدخال اسم المشروع.', 'error');
 
-    const slug = 'proj-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
+    const slug = 'sh-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 5);
 
     const { data, error } = await db.from('projects').insert([{
       user_id: currentUser.id,
@@ -331,9 +502,10 @@
     document.getElementById('projName').value = '';
     document.getElementById('projDesc').value = '';
     showAlert('تم إنشاء المشروع بنجاح!', 'success');
+    switchMainTab('projects');
     await loadProjects();
     await loadStats();
-    selectProject(data.id, data.name);
+    selectProject(data.id);
   }
 
   async function loadProjects() {
@@ -348,106 +520,301 @@
       container.innerHTML = `<p class="meta" style="color:red;">خطأ: ${error.message}</p>`;
       return;
     }
-    if (!data || data.length === 0) {
-      container.innerHTML = '<p class="meta">لا توجد مشاريع بعد. أنشئ مشروعك الأول من النموذج أعلاه.</p>';
+    projectsCache = data || [];
+    if (projectsCache.length === 0) {
+      container.innerHTML = '<p class="meta">لا توجد مشاريع بعد. اضغط على تبويب "➕ مشروع جديد" للبدء.</p>';
       return;
     }
 
-    container.innerHTML = data.map(p => `
-      <div class="project-item ${p.id === selectedProjectId ? 'selected' : ''}">
-        <div class="item-header">
-          <div>
-            <div class="item-title">${escapeHtml(p.name)}</div>
-            <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
+    container.innerHTML = projectsCache.map(p => {
+      const isPub = p.visibility === 'public' && p.status === 'published';
+      return `
+        <div class="project-item ${selectedProject && p.id === selectedProject.id ? 'selected' : ''}">
+          <div class="item-header">
+            <div>
+              <div class="item-title">${escapeHtml(p.name)}</div>
+              <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
+              <span class="badge ${isPub ? 'badge-public' : 'badge-private'}">${isPub ? '🌐 عام للجميع' : '🔒 خاص'}</span>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="selectProject('${p.id}')">إدارة</button>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="selectProject('${p.id}', '${escapeHtml(p.name)}')">فتح الملفات</button>
+          ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
         </div>
-        ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
+      `;
+    }).join('');
+  }
+
+  async function selectProject(projectId) {
+    selectedProject = projectsCache.find(p => p.id === projectId);
+    if (!selectedProject) return;
+
+    currentFolderId = null;
+    folderStack = [];
+    document.getElementById('filesManagerCard').classList.remove('hidden');
+    document.getElementById('selectedProjectTitle').textContent = 'إدارة: ' + selectedProject.name;
+    updateShareUI();
+    await loadProjects();
+    await refreshFolderAndFiles();
+    document.getElementById('filesManagerCard').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function updateShareUI() {
+    const isPub = selectedProject.visibility === 'public' && selectedProject.status === 'published';
+    const badge = document.getElementById('projectVisibilityBadge');
+    const btn = document.getElementById('toggleShareBtn');
+    const area = document.getElementById('publicLinkArea');
+
+    if (isPub) {
+      badge.textContent = '🌐 منشور ومتاح للجميع';
+      badge.className = 'badge badge-public';
+      btn.textContent = '🔒 تحويل إلى خاص';
+      btn.className = 'btn btn-outline btn-sm';
+      area.classList.remove('hidden');
+
+      const shareUrl = `${window.location.origin}${window.location.pathname}?share=${selectedProject.slug}`;
+      document.getElementById('publicShareUrl').value = shareUrl;
+      document.getElementById('projectQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}`;
+    } else {
+      badge.textContent = '🔒 خاص (لك فقط)';
+      badge.className = 'badge badge-private';
+      btn.textContent = '🌐 نشر ومشاركة للجميع';
+      btn.className = 'btn btn-success btn-sm';
+      area.classList.add('hidden');
+    }
+  }
+
+  async function toggleProjectPublic() {
+    const isCurrentlyPub = selectedProject.visibility === 'public' && selectedProject.status === 'published';
+    const updates = isCurrentlyPub
+      ? { visibility: 'private', status: 'draft' }
+      : { visibility: 'public', status: 'published', published_at: new Date().toISOString() };
+
+    const { data, error } = await db
+      .from('projects')
+      .update(updates)
+      .eq('id', selectedProject.id)
+      .select()
+      .single();
+
+    if (error) return showAlert('فشل تحديث حالة النشر: ' + error.message, 'error');
+
+    selectedProject = data;
+    // جعل ملفات المشروع عامة تلقائياً عند نشر المشروع
+    if (!isCurrentlyPub) {
+      await db.from('project_files').update({ is_public: true }).eq('project_id', selectedProject.id);
+    }
+
+    showAlert(isCurrentlyPub ? 'تم تحويل المشروع إلى خاص.' : 'تم نشر المشروع! يمكنك الآن نسخ الرابط ومشاركته للجميع.', 'success');
+    updateShareUI();
+    await loadProjects();
+  }
+
+  function copyShareUrl() {
+    const input = document.getElementById('publicShareUrl');
+    input.select();
+    navigator.clipboard.writeText(input.value);
+    showAlert('تم نسخ رابط المشاركة المباشر!', 'success');
+  }
+
+  // إدارة المجلدات الفرعية
+  async function createFolder() {
+    const name = prompt('أدخل اسم المجلد الجديد (مثال: الشواهد، الخطط، التقارير):');
+    if (!name || !name.trim()) return;
+
+    const { error } = await db.from('project_folders').insert([{
+      project_id: selectedProject.id,
+      parent_id: currentFolderId,
+      name: name.trim()
+    }]);
+
+    if (error) return showAlert('فشل إنشاء المجلد: ' + error.message, 'error');
+    showAlert('تم إنشاء المجلد بنجاح.', 'success');
+    await refreshFolderAndFiles();
+  }
+
+  function openFolder(folderId, folderName) {
+    folderStack.push({ id: currentFolderId, name: document.getElementById('folderPathLabel').textContent });
+    currentFolderId = folderId;
+    document.getElementById('folderPathLabel').textContent = '📂 ' + folderName;
+    document.getElementById('backFolderBtn').classList.remove('hidden');
+    refreshFolderAndFiles();
+  }
+
+  function goParentFolder() {
+    if (folderStack.length === 0) return;
+    const prev = folderStack.pop();
+    currentFolderId = prev.id;
+    document.getElementById('folderPathLabel').textContent = prev.name;
+    if (folderStack.length === 0) {
+      document.getElementById('backFolderBtn').classList.add('hidden');
+    }
+    refreshFolderAndFiles();
+  }
+
+  async function deleteFolder(folderId) {
+    if (!confirm('حذف هذا المجلد؟ (يجب أن يكون فارغاً أولاً)')) return;
+    const { error } = await db.from('project_folders').delete().eq('id', folderId);
+    if (error) return showAlert('تعذر حذف المجلد: ' + error.message, 'error');
+    showAlert('تم حذف المجلد.', 'success');
+    await refreshFolderAndFiles();
+  }
+
+  async function refreshFolderAndFiles() {
+    // 1. جلب المجلدات
+    let fQuery = db.from('project_folders').select('*').eq('project_id', selectedProject.id).order('created_at', { ascending: true });
+    fQuery = currentFolderId ? fQuery.eq('parent_id', currentFolderId) : fQuery.is('parent_id', null);
+    const { data: folders } = await fQuery;
+
+    const foldersEl = document.getElementById('foldersList');
+    foldersEl.innerHTML = (folders || []).map(fld => `
+      <div class="folder-item">
+        <div style="font-weight:800; color:var(--navy); cursor:pointer;" onclick="openFolder('${fld.id}', '${escapeHtml(fld.name)}')">
+          📁 ${escapeHtml(fld.name)}
+        </div>
+        <div style="display:flex; gap:5px;">
+          <button class="btn btn-primary btn-sm" onclick="openFolder('${fld.id}', '${escapeHtml(fld.name)}')">فتح</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteFolder('${fld.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+
+    // 2. جلب الملفات
+    let fileQuery = db.from('project_files').select('*').eq('project_id', selectedProject.id).order('created_at', { ascending: false });
+    fileQuery = currentFolderId ? fileQuery.eq('folder_id', currentFolderId) : fileQuery.is('folder_id', null);
+    const { data: files } = await fileQuery;
+
+    const filesEl = document.getElementById('filesList');
+    if (!files || files.length === 0) {
+      filesEl.innerHTML = '<p class="meta">لا توجد ملفات في هذا المسار حتى الآن.</p>';
+      return;
+    }
+
+    filesEl.innerHTML = files.map(f => `
+      <div class="file-item">
+        <div class="item-title">📄 ${escapeHtml(f.name)}</div>
+        <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB | النوع: ${escapeHtml(f.file_type || '-')}</div>
+        <div class="actions">
+          <button class="btn btn-sky btn-sm" onclick="downloadFile('${f.storage_path}')">⬇️ فتح / تنزيل</button>
+          <button class="btn btn-gold btn-sm" onclick="uploadNewVersion('${f.id}', '${f.storage_path}', ${f.file_size})">🔄 إصدار جديد</button>
+          <button class="btn btn-outline btn-sm" onclick="showVersions('${f.id}')">🕒 الإصدارات</button>
+          <button class="btn btn-outline btn-sm" onclick="renameFile('${f.id}', '${escapeHtml(f.name)}')">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteFile('${f.id}', '${f.storage_path}')">🗑️</button>
+        </div>
+        <div id="versions-${f.id}" class="version-list hidden"></div>
       </div>
     `).join('');
   }
 
-  async function selectProject(projectId, projectName) {
-    selectedProjectId = projectId;
-    document.getElementById('filesManagerCard').classList.remove('hidden');
-    document.getElementById('selectedProjectTitle').textContent = 'ملفات مشروع: ' + projectName;
-    await loadProjects();
-    await loadProjectFiles();
-    document.getElementById('filesManagerCard').scrollIntoView({ behavior: 'smooth' });
-  }
-
   async function uploadFile() {
-    if (!selectedProjectId) return showAlert('اختر مشروعاً أولاً.', 'error');
+    if (!selectedProject) return showAlert('اختر مشروعاً أولاً.', 'error');
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
     if (!file) return showAlert('يرجى اختيار ملف من هاتفك أولاً.', 'error');
 
     const safeExt = file.name.split('.').pop() || 'bin';
     const uniqueFileName = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${safeExt}`;
-    // المسار يطابق سياسة الأمان تماماً: user_id/project_id/filename
-    const storagePath = `${currentUser.id}/${selectedProjectId}/${uniqueFileName}`;
+    const storagePath = `${currentUser.id}/${selectedProject.id}/${uniqueFileName}`;
+    const isPublic = document.getElementById('fileIsPublic').checked;
 
     showAlert('جاري رفع الملف إلى السحابة...', 'success');
 
-    // 1. الرفع إلى Storage Bucket
     const { error: uploadError } = await db.storage
       .from('project-files')
       .upload(storagePath, file, { contentType: file.type, upsert: false });
 
-    if (uploadError) {
-      return showAlert('فشل الرفع للتخزين: ' + uploadError.message, 'error');
-    }
+    if (uploadError) return showAlert('فشل الرفع للتخزين: ' + uploadError.message, 'error');
 
-    // 2. تسجيل البيانات في جدول project_files
     const { error: dbError } = await db.from('project_files').insert([{
-      project_id: selectedProjectId,
+      project_id: selectedProject.id,
+      folder_id: currentFolderId,
       user_id: currentUser.id,
       name: file.name,
       storage_path: storagePath,
       file_type: safeExt.toLowerCase(),
       mime_type: file.type || 'application/octet-stream',
       file_size: file.size,
-      is_public: false
+      is_public: isPublic
     }]);
 
     if (dbError) {
-      // التراجع وحذف الملف من التخزين إذا فشل الحفظ في الجدول
       await db.storage.from('project-files').remove([storagePath]);
       return showAlert('فشل حفظ بيانات الملف: ' + dbError.message, 'error');
     }
 
     fileInput.value = '';
-    showAlert('تم رفع الملف وتسجيله في قاعدة البيانات بنجاح!', 'success');
-    await loadProjectFiles();
+    showAlert('تم رفع الملف بنجاح!', 'success');
+    await refreshFolderAndFiles();
     await loadStats();
   }
 
-  async function loadProjectFiles() {
-    const container = document.getElementById('filesList');
-    const { data, error } = await db
-      .from('project_files')
+  // نظام الإصدارات والتحديثات (project_versions)
+  async function uploadNewVersion(fileId, oldStoragePath, oldSize) {
+    const picker = document.createElement('input');
+    picker.type = 'file';
+    picker.onchange = async () => {
+      const newFile = picker.files[0];
+      if (!newFile) return;
+
+      // معرفة رقم الإصدار التالي
+      const { data: existingVers } = await db
+        .from('project_versions')
+        .select('version_number')
+        .eq('file_id', fileId)
+        .order('version_number', { ascending: false });
+
+      const nextVer = existingVers && existingVers.length > 0 ? existingVers[0].version_number + 1 : 1;
+
+      // أرشفة النسخة السابقة في جدول project_versions
+      await db.from('project_versions').insert([{
+        project_id: selectedProject.id,
+        file_id: fileId,
+        user_id: currentUser.id,
+        version_number: nextVer,
+        storage_path: oldStoragePath,
+        file_size: oldSize
+      }]);
+
+      // رفع النسخة الجديدة
+      const safeExt = newFile.name.split('.').pop() || 'bin';
+      const newPath = `${currentUser.id}/${selectedProject.id}/${Date.now()}_v${nextVer + 1}.${safeExt}`;
+      const { error: upErr } = await db.storage.from('project-files').upload(newPath, newFile, { contentType: newFile.type });
+      if (upErr) return showAlert('فشل رفع الإصدار الجديد: ' + upErr.message, 'error');
+
+      await db.from('project_files').update({
+        storage_path: newPath,
+        file_size: newFile.size,
+        file_type: safeExt.toLowerCase(),
+        mime_type: newFile.type
+      }).eq('id', fileId);
+
+      showAlert(`تم تحديث الملف وحفظ الإصدار السابق (v${nextVer}) في الأرشيف!`, 'success');
+      await refreshFolderAndFiles();
+      await loadStats();
+    };
+    picker.click();
+  }
+
+  async function showVersions(fileId) {
+    const box = document.getElementById('versions-' + fileId);
+    if (!box.classList.contains('hidden')) {
+      box.classList.add('hidden');
+      return;
+    }
+    const { data } = await db
+      .from('project_versions')
       .select('*')
-      .eq('project_id', selectedProjectId)
-      .order('created_at', { ascending: false });
+      .eq('file_id', fileId)
+      .order('version_number', { ascending: false });
 
-    if (error) {
-      container.innerHTML = `<p class="meta" style="color:red;">خطأ: ${error.message}</p>`;
-      return;
-    }
+    box.classList.remove('hidden');
     if (!data || data.length === 0) {
-      container.innerHTML = '<p class="meta">لا توجد ملفات في هذا المشروع حتى الآن.</p>';
+      box.innerHTML = '<span class="meta">هذا هو الإصدار الأول (لا توجد إصدارات سابقة مؤرشفة).</span>';
       return;
     }
-
-    container.innerHTML = data.map(f => `
-      <div class="file-item">
-        <div class="item-title">📄 ${escapeHtml(f.name)}</div>
-        <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB | النوع: ${escapeHtml(f.file_type || '-')}</div>
-        <div class="actions">
-          <button class="btn btn-sky btn-sm" onclick="downloadFile('${f.storage_path}')">⬇️ فتح / تنزيل</button>
-          <button class="btn btn-outline btn-sm" onclick="renameFile('${f.id}', '${escapeHtml(f.name)}')">✏️ تعديل الاسم</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteFile('${f.id}', '${f.storage_path}')">🗑️ حذف</button>
-        </div>
+    box.innerHTML = '<strong>الإصدارات السابقة المحفوظة:</strong>' + data.map(v => `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+        <span>الإصدار v${v.version_number} (${(v.file_size / 1024).toFixed(1)} KB)</span>
+        <button class="btn btn-outline btn-sm" onclick="downloadFile('${v.storage_path}')">⬇️ تنزيل</button>
       </div>
     `).join('');
   }
@@ -455,7 +822,7 @@
   async function downloadFile(storagePath) {
     const { data, error } = await db.storage
       .from('project-files')
-      .createSignedUrl(storagePath, 120); // رابط مؤقت آمن لمدة دقيقتين
+      .createSignedUrl(storagePath, 180);
 
     if (error) return showAlert('تعذر إنشاء رابط التنزيل: ' + error.message, 'error');
     window.open(data.signedUrl, '_blank');
@@ -465,14 +832,10 @@
     const newName = prompt('أدخل الاسم الجديد للملف:', oldName);
     if (!newName || newName.trim() === '' || newName === oldName) return;
 
-    const { error } = await db
-      .from('project_files')
-      .update({ name: newName.trim() })
-      .eq('id', fileId);
-
+    const { error } = await db.from('project_files').update({ name: newName.trim() }).eq('id', fileId);
     if (error) return showAlert('فشل التعديل: ' + error.message, 'error');
-    showAlert('تم تعديل اسم الملف بنجاح.', 'success');
-    await loadProjectFiles();
+    showAlert('تم تعديل اسم الملف.', 'success');
+    await refreshFolderAndFiles();
   }
 
   async function deleteFile(fileId, storagePath) {
@@ -485,7 +848,7 @@
     if (dbErr) return showAlert('فشل الحذف من القاعدة: ' + dbErr.message, 'error');
 
     showAlert('تم حذف الملف نهائياً.', 'success');
-    await loadProjectFiles();
+    await refreshFolderAndFiles();
     await loadStats();
   }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>منصة شملان الرقمية | SHAMLAN Cloud Platform</title>
+  <title>منصة شملان الرقمية | SHAMLAN Private Cloud</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
@@ -47,7 +47,7 @@
       display: flex; align-items: center; gap: 8px; border-right: 4px solid var(--gold); padding-right: 10px;
     }
     .nav-pills {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px;
       background: #e2e8f0; padding: 5px; border-radius: 14px;
     }
     .nav-pill {
@@ -95,7 +95,6 @@
     .btn-gold { background: var(--gold); color: #fff; }
     .btn-sky { background: var(--sky); color: #fff; }
     .btn-emerald { background: var(--emerald); color: #fff; }
-    .btn-whatsapp { background: #25d366; color: #fff; }
     .btn-danger { background: var(--danger); color: #fff; }
     .btn-outline { background: #fff; border: 1.5px solid var(--border); color: var(--text); }
     .btn-sm { padding: 7px 11px; font-size: 12px; width: auto; border-radius: 8px; }
@@ -110,15 +109,15 @@
       background: var(--gold-soft); border: 1.5px solid #fcd34d; border-radius: 12px; padding: 11px 13px;
       margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
     }
-    .instant-link-banner {
-      background: #ecfdf5; border: 2px solid #10b981; border-radius: 14px; padding: 14px; margin: 14px 0;
+    .privacy-banner {
+      background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px; margin: 12px 0;
+      font-size: 12px; color: var(--navy); display: flex; align-items: center; gap: 8px;
     }
     .badge {
       display: inline-block; padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 700;
       background: var(--gold-soft); color: var(--gold); margin-left: 4px;
     }
-    .badge-public { background: var(--emerald-soft); color: var(--emerald); }
-    .badge-private { background: #e2e8f0; color: #475569; }
+    .badge-private { background: #e2e8f0; color: #334155; }
     .meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .hidden { display: none !important; }
@@ -135,9 +134,6 @@
       background: var(--sky-soft); color: var(--navy); padding: 9px 12px; border-radius: 10px;
       font-size: 13px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;
     }
-    .qr-wrap { text-align: center; margin-top: 12px; }
-    .qr-wrap img { border: 5px solid #fff; border-radius: 12px; }
-    .version-list { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 12px; }
   </style>
 </head>
 <body>
@@ -147,7 +143,7 @@
     <div class="brand-logo">SHAMLAN</div>
     <div>
       <h1>منصة شملان الرقمية</h1>
-      <span>السحابة الذكية للمشاريع والشواهد والمنصات</span>
+      <span>مساحة العمل السحابية الخاصة والمحمية</span>
     </div>
   </div>
   <div id="headerUser" class="user-pill hidden">
@@ -159,34 +155,9 @@
 <div class="container">
   <div id="alertBox" class="alert"></div>
 
-  <div id="publicViewerSection" class="hidden">
-    <div class="card" style="border-top: 4px solid var(--emerald);">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
-        <span class="badge badge-public">✅ مشروع منشور وموثّق عبر منصة شملان</span>
-        <span id="pubProjCat" class="badge"></span>
-      </div>
-      <h2 id="pubProjTitle" style="margin:0 0 6px; color:var(--navy); font-size:20px;">جاري تحميل المشروع...</h2>
-      <p id="pubProjDesc" class="meta" style="font-size:13px;"></p>
-      <div id="pubFilesList" style="margin-top:16px;"></div>
-      <div style="margin-top:18px; padding-top:12px; border-top:1px solid var(--border); display:flex; gap:8px; flex-wrap:wrap;">
-        <button type="button" class="btn btn-sky btn-sm" id="btnOpenGalleryFromPub">🌐 تصفح فهرس مشاريع المنصة العامة</button>
-        <button type="button" class="btn btn-outline btn-sm" id="btnExitPub">🔐 دخول الأعضاء / لوحة التحكم</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="publicGallerySection" class="hidden">
-    <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-        <h2 class="card-title" style="margin:0;">🌐 فهرس المشاريع والمنصات المنشورة</h2>
-        <button type="button" class="btn btn-outline btn-sm" id="btnExitGallery">رجوع</button>
-      </div>
-      <div id="galleryList"><p class="meta">جاري تحميل المعرض...</p></div>
-    </div>
-  </div>
-
+  <!-- شاشة الدخول الخاصة -->
   <div id="authSection" class="card">
-    <div class="nav-pills" style="grid-template-columns: 1fr 1fr;">
+    <div class="nav-pills">
       <div id="tabLogin" class="nav-pill active">تسجيل الدخول</div>
       <div id="tabSignup" class="nav-pill">إنشاء حساب جديد</div>
     </div>
@@ -203,33 +174,33 @@
       <label>كلمة المرور (6 أحرف على الأقل)</label>
       <input type="password" id="authPassword" placeholder="••••••••" dir="ltr" />
     </div>
-    <button type="button" id="authSubmitBtn" class="btn btn-primary">دخول إلى المنصة</button>
-
-    <div style="margin-top:14px; text-align:center;">
-      <button type="button" id="btnOpenGalleryAuth" class="btn btn-outline btn-sm">🌐 تصفح معرض المشاريع العامة بدون تسجيل</button>
+    <button type="button" id="authSubmitBtn" class="btn btn-primary">دخول إلى مساحتي الخاصة</button>
+    <div class="meta" style="text-align:center; margin-top:10px;">
+      🔒 جميع المشاريع والملفات في المنصة خاصة ومشفرة لكل حساب ولا يمكن لأي زائر أو مستخدم آخر تصفحها أو تنزيلها.
     </div>
   </div>
 
+  <!-- لوحة التحكم الخاصة بالمستخدم -->
   <div id="dashboardSection" class="hidden">
     <div id="mainNavPills" class="nav-pills">
       <div id="navProjects" class="nav-pill active">📑 الفهرس ومشاريعي</div>
-      <div id="navNewProject" class="nav-pill">➕ رفع مشروع جديد</div>
-      <div id="navGallery" class="nav-pill">🌐 المعرض العام</div>
+      <div id="navNewProject" class="nav-pill">➕ إضافة مشروع خاص</div>
       <div id="navAdmin" class="nav-pill hidden">🛡️ الإدارة</div>
     </div>
 
     <div class="stats-grid">
-      <div class="stat-box"><div class="num" id="statProjects">0</div><div class="lbl">المشاريع</div></div>
-      <div class="stat-box"><div class="num" id="statFiles">0</div><div class="lbl">الملفات</div></div>
+      <div class="stat-box"><div class="num" id="statProjects">0</div><div class="lbl">مشاريعي</div></div>
+      <div class="stat-box"><div class="num" id="statFiles">0</div><div class="lbl">ملفاتي</div></div>
       <div class="stat-box"><div class="num" id="statStorage">0 MB</div><div class="lbl">المساحة</div></div>
     </div>
     <div class="quota-bar-wrap">
-      <div class="quota-head"><span>السعة السحابية المستخدمة</span><span id="quotaText">0 / 100 MB</span></div>
+      <div class="quota-head"><span>السعة السحابية الخاصة</span><span id="quotaText">0 / 100 MB</span></div>
       <div class="quota-track"><div id="quotaFill" class="quota-fill"></div></div>
     </div>
 
+    <!-- إنشاء مشروع خاص -->
     <div id="viewNewProject" class="card hidden">
-      <h2 class="card-title">➕ إنشاء مشروع ورفعه سحابياً</h2>
+      <h2 class="card-title">➕ إنشاء مشروع خاص وحفظه سحابياً</h2>
       <div class="form-group">
         <label>اسم المشروع / المبادرة / ملف الإنجاز</label>
         <input type="text" id="projName" placeholder="مثال: مبادرة أثر ينمو - فرسان" />
@@ -239,56 +210,35 @@
         <select id="projCategory"></select>
       </div>
       <div class="form-group">
-        <label>وصف مختصر (اختياري)</label>
-        <textarea id="projDesc" rows="2" placeholder="نبذة عن المشروع تظهر عند مشاركة الرابط..."></textarea>
+        <label>ملاحظات / وصف المشروع (خاص بك)</label>
+        <textarea id="projDesc" rows="2" placeholder="تفاصيل المشروع..."></textarea>
       </div>
       <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:12px; border:1.5px dashed var(--sky);">
-        <label>إرفاق ملف المشروع الأساسي مباشرة (HTML / PDF / صورة / ZIP)</label>
+        <label>إرفاق ملف المشروع الأساسي (HTML / PDF / صورة / ZIP) - اختياري</label>
         <input type="file" id="initialProjFile" />
-        <div style="margin-top:8px; display:flex; align-items:center; gap:6px;">
-          <input type="checkbox" id="autoPublishProj" checked style="width:auto;" />
-          <label for="autoPublishProj" style="margin:0; font-weight:700; color:var(--emerald);">نشر المشروع وتوليد رابط مباشر للمشاركة للجميع فوراً</label>
-        </div>
       </div>
-      <button type="button" id="createProjBtn" class="btn btn-gold">🚀 حفظ المشروع وتوليد الرابط المباشر</button>
+      <button type="button" id="createProjBtn" class="btn btn-gold">🔒 حفظ المشروع في مساحتي الخاصة</button>
     </div>
 
+    <!-- الفهرس والمشاريع الخاصة -->
     <div id="viewProjects">
       <div class="index-box">
-        <div style="font-weight:800; color:var(--navy); font-size:14px; margin-bottom:8px;">📑 فهرس المشاريع السريع</div>
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث باسم المشروع أو الوصف..." />
+        <div style="font-weight:800; color:var(--navy); font-size:14px; margin-bottom:8px;">📑 فهرس مشاريعي السريع</div>
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث في مشاريعك الخاصة..." />
         <div id="categoryChips" class="chips-scroll"></div>
       </div>
 
       <div class="card">
-        <h2 class="card-title">مشاريعي المسجلة (<span id="filteredCount">0</span>)</h2>
+        <h2 class="card-title">مشاريعي المحفوظة (<span id="filteredCount">0</span>)</h2>
         <div id="projectsList"><p class="meta">جاري التحميل...</p></div>
       </div>
 
       <div id="filesManagerCard" class="card hidden">
         <h2 id="selectedProjectTitle" class="card-title">إدارة المشروع</h2>
 
-        <div id="shareBannerBox" class="instant-link-banner">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
-            <div><strong>حالة النشر:</strong> <span id="projectVisibilityBadge" class="badge badge-private">خاص</span></div>
-            <button type="button" id="toggleShareBtn" class="btn btn-emerald btn-sm">🌐 نشر للجميع</button>
-          </div>
-
-          <div id="publicLinkArea" class="hidden">
-            <label style="color:#065f46;">🔗 الرابط المباشر لمشروعك (انسخه وشاركه للجميع):</label>
-            <div style="display:flex; gap:6px; margin-bottom:8px;">
-              <input type="text" id="publicShareUrl" readonly dir="ltr" style="font-size:12px; background:#fff; border-color:#10b981;" />
-              <button type="button" id="btnCopyShare" class="btn btn-primary btn-sm">📋 نسخ</button>
-            </div>
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <button type="button" id="btnShareWa" class="btn btn-whatsapp btn-sm">📲 مشاركة عبر واتساب</button>
-              <button type="button" id="btnPreviewPub" class="btn btn-sky btn-sm">👁️ معاينة كزائر</button>
-            </div>
-            <div class="qr-wrap">
-              <img id="projectQrImg" src="" alt="QR Code" width="135" height="135" />
-              <div class="meta">باركود الوصول الفوري للمشروع</div>
-            </div>
-          </div>
+        <div class="privacy-banner">
+          <span>🔒</span>
+          <span><strong>حماية الخصوصية مفعّلة:</strong> هذا المشروع وجميع ملفاته محصورة بحسابك فقط، وممنوعة من التصفح العام أو التنزيل الخارجي.</span>
         </div>
 
         <div class="breadcrumb">
@@ -302,12 +252,8 @@
         <div id="foldersList"></div>
 
         <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:12px; border:1.5px dashed var(--sky); margin-top:10px;">
-          <label>رفع ملف جديد إلى المسار الحالي (حتى 100MB)</label>
+          <label>رفع ملف خاص إلى المسار الحالي (حتى 100MB)</label>
           <input type="file" id="fileInput" />
-          <div style="margin-top:8px; display:flex; align-items:center; gap:6px;">
-            <input type="checkbox" id="fileIsPublic" checked style="width:auto;" />
-            <label for="fileIsPublic" style="margin:0; font-weight:600;">إتاحة الملف للزوار في الرابط العام</label>
-          </div>
           <button type="button" id="uploadFileBtn" class="btn btn-sky" style="margin-top:8px;">⬆️ رفع الملف وحفظه سحابياً</button>
         </div>
 
@@ -315,8 +261,9 @@
       </div>
     </div>
 
+    <!-- لوحة الإدارة -->
     <div id="viewAdmin" class="card hidden">
-      <h2 class="card-title">🛡️ لوحة الإدارة والإشراف العام</h2>
+      <h2 class="card-title">🛡️ لوحة الإدارة والإشراف</h2>
       <div id="adminSummaryBox"><p class="meta">مرحباً بك بصلاحية مدير المنصة (Admin).</p></div>
     </div>
   </div>
@@ -340,7 +287,7 @@
     const box = document.getElementById('alertBox');
     box.textContent = msg;
     box.className = 'alert ' + type;
-    setTimeout(() => { box.className = 'alert'; }, 5500);
+    setTimeout(() => { box.className = 'alert'; }, 5000);
   }
 
   function escapeHtml(str) {
@@ -362,7 +309,7 @@
     document.getElementById('tabLogin').classList.toggle('active', mode === 'login');
     document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
     document.getElementById('signupNameGroup').classList.toggle('hidden', mode === 'login');
-    document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'دخول إلى المنصة' : 'إنشاء الحساب والدخول';
+    document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'دخول إلى مساحتي الخاصة' : 'إنشاء الحساب والدخول';
   }
 
   function switchMainTab(tab) {
@@ -387,7 +334,7 @@
     if (window.supabase) {
       db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     } else {
-      showAlert('تعذر الاتصال بالخادم السحابي، تأكد من الإنترنت وحدّث الصفحة.', 'error');
+      showAlert('تعذر الاتصال بالخادم، تأكد من اتصال الإنترنت وحدّث الصفحة.', 'error');
     }
   }
 
@@ -401,7 +348,7 @@
 
     const btn = document.getElementById('authSubmitBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري المعالجة...';
+    btn.textContent = 'جاري التحقق...';
     try {
       if (authMode === 'signup') {
         const { data, error } = await db.auth.signUp({
@@ -412,132 +359,23 @@
         if (data.user && displayName) {
           await db.from('profiles').update({ display_name: displayName }).eq('id', data.user.id);
         }
-        showAlert('تم إنشاء الحساب بنجاح!', 'success');
+        showAlert('تم إنشاء الحساب الخاص بنجاح!', 'success');
       } else {
         const { error } = await db.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        showAlert('مرحباً بعودتك إلى منصة شملان.', 'success');
+        showAlert('تم تسجيل الدخول إلى مساحتك الخاصة.', 'success');
       }
     } catch (err) {
       showAlert('خطأ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = authMode === 'login' ? 'دخول إلى المنصة' : 'إنشاء الحساب والدخول';
-    }
-  }
-
-  async function openPublicGallery() {
-    if (!db) await initSupabase();
-    if (!db) return;
-    document.getElementById('authSection').classList.add('hidden');
-    document.getElementById('dashboardSection').classList.add('hidden');
-    document.getElementById('publicViewerSection').classList.add('hidden');
-    document.getElementById('publicGallerySection').classList.remove('hidden');
-
-    const { data: cats } = await db.from('project_categories').select('id, name');
-    const cMap = {};
-    (cats || []).forEach(c => cMap[c.id] = c.name);
-
-    const { data: projs } = await db
-      .from('projects')
-      .select('*')
-      .eq('visibility', 'public')
-      .eq('status', 'published')
-      .order('published_at', { ascending: false })
-      .limit(30);
-
-    const gEl = document.getElementById('galleryList');
-    if (!projs || projs.length === 0) {
-      gEl.innerHTML = '<p class="meta">لا توجد مشاريع منشورة في المعرض العام حتى الآن.</p>';
-      return;
-    }
-
-    gEl.innerHTML = projs.map(p => `
-      <div class="project-card">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-          <div>
-            <div style="font-weight:800; color:var(--navy); font-size:15px;">${escapeHtml(p.name)}</div>
-            <span class="badge">${escapeHtml(cMap[p.category_id] || 'عام')}</span>
-          </div>
-          <button type="button" class="btn btn-emerald btn-sm" onclick="openPublicProject('${p.slug}')">فتح المشروع</button>
-        </div>
-        ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
-      </div>
-    `).join('');
-  }
-
-  async function openPublicProject(slug) {
-    if (!db) await initSupabase();
-    document.getElementById('authSection').classList.add('hidden');
-    document.getElementById('dashboardSection').classList.add('hidden');
-    document.getElementById('publicGallerySection').classList.add('hidden');
-    document.getElementById('publicViewerSection').classList.remove('hidden');
-
-    const { data: cats } = await db.from('project_categories').select('id, name');
-    const cMap = {};
-    (cats || []).forEach(c => cMap[c.id] = c.name);
-
-    const { data: proj, error } = await db
-      .from('projects')
-      .select('*')
-      .eq('slug', slug)
-      .eq('visibility', 'public')
-      .eq('status', 'published')
-      .single();
-
-    if (error || !proj) {
-      document.getElementById('pubProjTitle').textContent = 'المشروع غير متاح أو خاص';
-      document.getElementById('pubProjDesc').textContent = 'تأكد من صحة رابط المشاركة أو أن صاحب المشروع قام بنشره للعامة.';
-      document.getElementById('pubFilesList').innerHTML = '';
-      return;
-    }
-
-    document.getElementById('pubProjTitle').textContent = proj.name;
-    document.getElementById('pubProjCat').textContent = cMap[proj.category_id] || 'مشروع رقمي';
-    document.getElementById('pubProjDesc').textContent = proj.description || 'مشروع رقمي محفوظ ومنشور عبر منصة شملان السحابية';
-
-    const { data: files } = await db
-      .from('project_files')
-      .select('*')
-      .eq('project_id', proj.id)
-      .eq('is_public', true)
-      .order('created_at', { ascending: false });
-
-    const listEl = document.getElementById('pubFilesList');
-    if (!files || files.length === 0) {
-      listEl.innerHTML = '<p class="meta">لا توجد ملفات عامة مرفقة حالياً.</p>';
-      return;
-    }
-
-    listEl.innerHTML = files.map(f => {
-      const isHtml = ['html', 'htm'].includes((f.file_type || '').toLowerCase());
-      return `
-        <div class="file-card" style="background:#fff;">
-          <div style="font-weight:800; color:var(--navy); font-size:15px;">${getFileIcon(f.file_type)} ${escapeHtml(f.name)}</div>
-          <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB</div>
-          <div class="actions">
-            ${isHtml ? `<button type="button" class="btn btn-emerald btn-sm" onclick="launchHtmlFile('${f.storage_path}')">🚀 تشغيل المنصة التفاعلية</button>` : ''}
-            <button type="button" class="btn btn-sky btn-sm" onclick="downloadFile('${f.storage_path}')">⬇️ عرض / تنزيل</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function exitPublicView() {
-    window.history.replaceState({}, document.title, window.location.pathname);
-    document.getElementById('publicViewerSection').classList.add('hidden');
-    document.getElementById('publicGallerySection').classList.add('hidden');
-    if (currentUser) {
-      document.getElementById('dashboardSection').classList.remove('hidden');
-    } else {
-      document.getElementById('authSection').classList.remove('hidden');
+      btn.textContent = authMode === 'login' ? 'دخول إلى مساحتي الخاصة' : 'إنشاء الحساب والدخول';
     }
   }
 
   async function launchHtmlFile(storagePath) {
-    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 600);
-    if (error) return showAlert('تعذر فتح الملف: ' + error.message, 'error');
+    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 120);
+    if (error) return showAlert('تعذر فتح المعاينة: ' + error.message, 'error');
     try {
       const res = await fetch(data.signedUrl);
       const htmlText = await res.text();
@@ -548,9 +386,9 @@
     }
   }
 
-  async function downloadFile(storagePath) {
-    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 180);
-    if (error) return showAlert('تعذر إنشاء رابط التنزيل: ' + error.message, 'error');
+  async function openMyPrivateFile(storagePath) {
+    const { data, error } = await db.storage.from('project-files').createSignedUrl(storagePath, 120);
+    if (error) return showAlert('تعذر فتح الملف: ' + error.message, 'error');
     window.open(data.signedUrl, '_blank');
   }
 
@@ -599,21 +437,19 @@
     const category_id = document.getElementById('projCategory').value;
     const description = document.getElementById('projDesc').value.trim();
     const initialFile = document.getElementById('initialProjFile').files[0];
-    const autoPublish = document.getElementById('autoPublishProj').checked;
     if (!name) return showAlert('يرجى إدخال اسم المشروع.', 'error');
 
     const btn = document.getElementById('createProjBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري الحفظ السحابي...';
+    btn.textContent = 'جاري الحفظ في مساحتك الخاصة...';
     try {
-      const slug = 'sh-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 5);
+      const slug = 'priv-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 6);
       const { data: proj, error } = await db.from('projects').insert([{
         user_id: currentUser.id,
         category_id: category_id || null,
         name, description, slug,
-        visibility: autoPublish ? 'public' : 'private',
-        status: autoPublish ? 'published' : 'draft',
-        published_at: autoPublish ? new Date().toISOString() : null,
+        visibility: 'private',
+        status: 'draft',
         keywords: []
       }]).select().single();
       if (error) throw error;
@@ -627,23 +463,23 @@
           project_id: proj.id, user_id: currentUser.id, name: initialFile.name,
           storage_path: storagePath, file_type: safeExt.toLowerCase(),
           mime_type: initialFile.type || 'application/octet-stream',
-          file_size: initialFile.size, is_public: autoPublish
+          file_size: initialFile.size, is_public: false
         }]);
       }
 
       document.getElementById('projName').value = '';
       document.getElementById('projDesc').value = '';
       document.getElementById('initialProjFile').value = '';
-      showAlert('تم حفظ المشروع سحابياً وتوليد الرابط المباشر بنجاح!', 'success');
+      showAlert('تم حفظ المشروع في مساحتك الخاصة بنجاح!', 'success');
       switchMainTab('projects');
       await loadProjects();
       await loadStats();
       selectProject(proj.id);
     } catch (err) {
-      showAlert('تعذر الإتمام: ' + err.message, 'error');
+      showAlert('تعذر الحفظ: ' + err.message, 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = '🚀 حفظ المشروع وتوليد الرابط المباشر';
+      btn.textContent = '🔒 حفظ المشروع في مساحتي الخاصة';
     }
   }
 
@@ -667,22 +503,19 @@
       container.innerHTML = '<p class="meta">لا توجد مشاريع مطابقة في الفهرس حالياً.</p>';
       return;
     }
-    container.innerHTML = filtered.map(p => {
-      const isPub = p.visibility === 'public' && p.status === 'published';
-      return `
-        <div class="project-card ${selectedProject && p.id === selectedProject.id ? 'selected' : ''}">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-            <div>
-              <div style="font-weight:800; font-size:15px; color:var(--navy); margin-bottom:4px;">${escapeHtml(p.name)}</div>
-              <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
-              <span class="badge ${isPub ? 'badge-public' : 'badge-private'}">${isPub ? '🌐 منشور للجميع' : '🔒 خاص'}</span>
-            </div>
-            <button type="button" class="btn btn-primary btn-sm" onclick="selectProject('${p.id}')">فتح وإدارة</button>
+    container.innerHTML = filtered.map(p => `
+      <div class="project-card ${selectedProject && p.id === selectedProject.id ? 'selected' : ''}">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+          <div>
+            <div style="font-weight:800; font-size:15px; color:var(--navy); margin-bottom:4px;">${escapeHtml(p.name)}</div>
+            <span class="badge">${escapeHtml(categoriesMap[p.category_id] || 'عام')}</span>
+            <span class="badge badge-private">🔒 خاص ومؤمّن</span>
           </div>
-          ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
+          <button type="button" class="btn btn-primary btn-sm" onclick="selectProject('${p.id}')">فتح وإدارة</button>
         </div>
-      `;
-    }).join('');
+        ${p.description ? `<div class="meta">${escapeHtml(p.description)}</div>` : ''}
+      </div>
+    `).join('');
   }
 
   async function selectProject(projectId) {
@@ -691,54 +524,10 @@
     currentFolderId = null;
     folderStack = [];
     document.getElementById('filesManagerCard').classList.remove('hidden');
-    document.getElementById('selectedProjectTitle').textContent = 'إدارة: ' + selectedProject.name;
-    updateShareUI();
+    document.getElementById('selectedProjectTitle').textContent = 'إدارة المشروع الخاص: ' + selectedProject.name;
     renderFilteredProjects();
     await refreshFolderAndFiles();
     document.getElementById('filesManagerCard').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function getDirectShareUrl() {
-    return `${window.location.origin}${window.location.pathname}?share=${selectedProject.slug}`;
-  }
-
-  function updateShareUI() {
-    const isPub = selectedProject.visibility === 'public' && selectedProject.status === 'published';
-    const badge = document.getElementById('projectVisibilityBadge');
-    const btn = document.getElementById('toggleShareBtn');
-    const area = document.getElementById('publicLinkArea');
-    if (isPub) {
-      badge.textContent = '🌐 منشور ومتاح للجميع';
-      badge.className = 'badge badge-public';
-      btn.textContent = '🔒 تحويل لخاص';
-      btn.className = 'btn btn-outline btn-sm';
-      area.classList.remove('hidden');
-      const shareUrl = getDirectShareUrl();
-      document.getElementById('publicShareUrl').value = shareUrl;
-      document.getElementById('projectQrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(shareUrl)}`;
-    } else {
-      badge.textContent = '🔒 خاص (لك فقط)';
-      badge.className = 'badge badge-private';
-      btn.textContent = '🌐 نشر وتوليد رابط للجميع';
-      btn.className = 'btn btn-emerald btn-sm';
-      area.classList.add('hidden');
-    }
-  }
-
-  async function toggleProjectPublic() {
-    const isCurrentlyPub = selectedProject.visibility === 'public' && selectedProject.status === 'published';
-    const updates = isCurrentlyPub
-      ? { visibility: 'private', status: 'draft' }
-      : { visibility: 'public', status: 'published', published_at: new Date().toISOString() };
-    const { data, error } = await db.from('projects').update(updates).eq('id', selectedProject.id).select().single();
-    if (error) return showAlert('فشل تحديث حالة النشر: ' + error.message, 'error');
-    selectedProject = data;
-    if (!isCurrentlyPub) {
-      await db.from('project_files').update({ is_public: true }).eq('project_id', selectedProject.id);
-    }
-    showAlert(isCurrentlyPub ? 'تم تحويل المشروع إلى خاص.' : 'تم نشر المشروع وتوليد الرابط المباشر!', 'success');
-    updateShareUI();
-    await loadProjects();
   }
 
   async function refreshFolderAndFiles() {
@@ -768,10 +557,10 @@
       return `
         <div class="file-card">
           <div style="font-weight:800; font-size:14px; color:var(--navy);">${getFileIcon(f.file_type)} ${escapeHtml(f.name)}</div>
-          <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB</div>
+          <div class="meta">الحجم: ${(f.file_size / 1024).toFixed(1)} KB | 🔒 خاص بك</div>
           <div class="actions">
-            ${isHtml ? `<button type="button" class="btn btn-emerald btn-sm" onclick="launchHtmlFile('${f.storage_path}')">🚀 تشغيل</button>` : ''}
-            <button type="button" class="btn btn-sky btn-sm" onclick="downloadFile('${f.storage_path}')">⬇️ تنزيل</button>
+            ${isHtml ? `<button type="button" class="btn btn-emerald btn-sm" onclick="launchHtmlFile('${f.storage_path}')">🚀 معاينة وتشغيل</button>` : ''}
+            <button type="button" class="btn btn-sky btn-sm" onclick="openMyPrivateFile('${f.storage_path}')">📂 فتح ملفي</button>
             <button type="button" class="btn btn-outline btn-sm" onclick="renameFile('${f.id}', '${escapeHtml(f.name)}')">✏️</button>
             <button type="button" class="btn btn-danger btn-sm" onclick="deleteFile('${f.id}', '${f.storage_path}')">🗑️</button>
           </div>
@@ -802,25 +591,20 @@
     if (!file) return showAlert('يرجى اختيار ملف من هاتفك أولاً.', 'error');
     const safeExt = file.name.split('.').pop() || 'bin';
     const storagePath = `${currentUser.id}/${selectedProject.id}/${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${safeExt}`;
-    const isPublic = document.getElementById('fileIsPublic').checked;
     const btn = document.getElementById('uploadFileBtn');
     btn.disabled = true;
-    btn.textContent = 'جاري الرفع...';
+    btn.textContent = 'جاري الحفظ السحابي الآمن...';
     try {
       const { error: uploadError } = await db.storage.from('project-files').upload(storagePath, file, { contentType: file.type });
       if (uploadError) throw uploadError;
       const { error: dbError } = await db.from('project_files').insert([{
         project_id: selectedProject.id, folder_id: currentFolderId, user_id: currentUser.id,
         name: file.name, storage_path: storagePath, file_type: safeExt.toLowerCase(),
-        mime_type: file.type || 'application/octet-stream', file_size: file.size, is_public: isPublic
+        mime_type: file.type || 'application/octet-stream', file_size: file.size, is_public: false
       }]);
       if (dbError) throw dbError;
-      if (isPublic && selectedProject.visibility !== 'public') {
-        const { data: updatedProj } = await db.from('projects').update({ visibility: 'public', status: 'published', published_at: new Date().toISOString() }).eq('id', selectedProject.id).select().single();
-        if (updatedProj) { selectedProject = updatedProj; updateShareUI(); await loadProjects(); }
-      }
       fileInput.value = '';
-      showAlert('تم رفع الملف وحفظه سحابياً! رابط المشروع المباشر جاهز في الأعلى.', 'success');
+      showAlert('تم رفع الملف وحفظه في مساحتك الخاصة بنجاح!', 'success');
       await refreshFolderAndFiles();
       await loadStats();
     } catch (err) {
@@ -846,32 +630,16 @@
     loadStats();
   }
 
-  // ربط جميع الأزرار برمجياً فور تحميل الصفحة لضمان استجابتها 100%
   document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
     document.getElementById('tabSignup').addEventListener('click', () => switchAuthTab('signup'));
     document.getElementById('authSubmitBtn').addEventListener('click', handleAuth);
-    document.getElementById('btnOpenGalleryAuth').addEventListener('click', openPublicGallery);
-    document.getElementById('btnOpenGalleryFromPub').addEventListener('click', openPublicGallery);
-    document.getElementById('btnExitPub').addEventListener('click', exitPublicView);
-    document.getElementById('btnExitGallery').addEventListener('click', exitPublicView);
     document.getElementById('btnLogout').addEventListener('click', async () => { if (db) await db.auth.signOut(); });
     document.getElementById('navProjects').addEventListener('click', () => switchMainTab('projects'));
     document.getElementById('navNewProject').addEventListener('click', () => switchMainTab('new'));
-    document.getElementById('navGallery').addEventListener('click', openPublicGallery);
     document.getElementById('navAdmin').addEventListener('click', () => switchMainTab('admin'));
     document.getElementById('createProjBtn').addEventListener('click', createProject);
     document.getElementById('searchInput').addEventListener('input', renderFilteredProjects);
-    document.getElementById('toggleShareBtn').addEventListener('click', toggleProjectPublic);
-    document.getElementById('btnCopyShare').addEventListener('click', () => {
-      navigator.clipboard.writeText(getDirectShareUrl());
-      showAlert('تم نسخ رابط المشروع المباشر!', 'success');
-    });
-    document.getElementById('btnShareWa').addEventListener('click', () => {
-      const text = `✨ *${selectedProject.name}*\n🔗 رابط المشروع المباشر عبر منصة شملان:\n${getDirectShareUrl()}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    });
-    document.getElementById('btnPreviewPub').addEventListener('click', () => window.open(getDirectShareUrl(), '_blank'));
     document.getElementById('btnNewFolder').addEventListener('click', async () => {
       const name = prompt('أدخل اسم المجلد الجديد:');
       if (!name || !name.trim()) return;
@@ -891,13 +659,6 @@
     await initSupabase();
     if (!db) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const shareSlug = params.get('share');
-    if (shareSlug) {
-      await openPublicProject(shareSlug);
-      return;
-    }
-
     db.auth.onAuthStateChange(async (event, session) => {
       currentUser = session?.user || null;
       if (currentUser) {
@@ -908,7 +669,7 @@
         const { data: prof } = await db.from('profiles').select('*').eq('id', currentUser.id).single();
         if (prof && prof.role === 'admin') {
           document.getElementById('navAdmin').classList.remove('hidden');
-          document.getElementById('mainNavPills').style.gridTemplateColumns = 'repeat(4, 1fr)';
+          document.getElementById('mainNavPills').style.gridTemplateColumns = 'repeat(3, 1fr)';
         }
         await loadCategories();
         await loadProjects();
